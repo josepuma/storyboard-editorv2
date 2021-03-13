@@ -74,7 +74,7 @@ export class SBParser{
                                 var endValue = values.length > 5 ? values[5] : startValue;
                                 sprite.scale(startTime, endTime, +startValue, +endValue);
                             break;
-                            case "V":                 
+                            case "V":                  
                                 var startX = +values[4];
                                 var startY = +values[5];
                                 var endX = values.length > 6 ? values[6] : startX;
