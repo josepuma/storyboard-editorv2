@@ -73,7 +73,7 @@ export default {
       this.sbEmitter = new StoryboardEmitter(this.app)
       this.sbEmitter.loadSprites(sprites)
       this.sbEmitter.loadTextures()
-      this.audio = new Player('audios/eos.mp3')
+      this.audio = new Player('audios/okaeri.mp3')
       this.$el.appendChild(this.app.view);
       window.addEventListener('resize', this.resize);
       

@@ -62,7 +62,7 @@ export class SBParser{
                             case 'MX':
                                 var startValue = values[4]
                                 var endValue = values.length > 5 ? values[5] : startValue;
-                                sprite.moveX(startTime, endTime, +startValue, +endValue);
+                                sprite.moveX(startTime, endTime, +startValue + 107, +endValue + 107);
                             break;
                             case 'MY':
                                 var startValue = values[4]
