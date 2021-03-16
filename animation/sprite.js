@@ -25,6 +25,7 @@ export class Sprite {
         this.size = 1.0
         this.isAdditive = false
         this.color = null
+        this.ratio = 0
     }
 
     loadTexture(texture){
@@ -63,21 +64,27 @@ export class Sprite {
     }
 
     setInitialCommands(){
+
+        //console.log(this.ratio)
+
         this.texture.alpha = this.fadeAnimation.startValue()
         if(this.positionX != 427 && this.moveXAnimation.commands.length == 0){
-            this.texture.x = this.positionX
+            this.texture.x = this.positionX  / this.getRatio() 
         }else{
-            this.texture.x = this.moveXAnimation.startValue()
+            this.texture.x = this.moveXAnimation.startValue()  / this.getRatio() 
         }
 
         if(this.positionY != 240 && this.moveYAnimation.commands.length == 0){
-            this.texture.y = this.positionY
+            this.texture.y = this.positionY / this.getRatio() 
         }else{
-            this.texture.y = this.moveYAnimation.startValue()
+            this.texture.y = this.moveYAnimation.startValue()  / this.getRatio() 
         }
 
         this.texture.rotation = this.rotateAnimation.startValue()
-        this.texture.scale.set(this.scaleAnimation.startValue())
+
+        this.texture.scale.x = this.scaleAnimation.startValue()  / this.getRatio()  
+        this.texture.scale.y = this.scaleAnimation.startValue()  / this.getRatio() 
+
 
         if(this.isAdditive){
             this.texture.blendMode = PIXI.BLEND_MODES.ADD;
@@ -114,8 +121,11 @@ export class Sprite {
         this.scaleVecAnimation.addCommand(command)
     }
 
+    getRatio(){
+        return this.roundValue(854 / window.innerWidth )
+    }
 
-    update(audioPosition){
+    update(audioPosition, ratio){
         if(this.isActive(audioPosition) && this.texture){
             this.texture.visible = true
 
@@ -127,28 +137,44 @@ export class Sprite {
                 this.texture.alpha = this.fadeAnimation.getValueAtTime(audioPosition)
 
             if(this.moveXAnimation.isActive(audioPosition))
-                this.texture.position.x = this.moveXAnimation.getValueAtTime(audioPosition)
+                this.texture.position.x = this.moveXAnimation.getValueAtTime(audioPosition)  / this.getRatio()
 
             if(this.moveYAnimation.isActive(audioPosition))
-                this.texture.position.y = this.moveYAnimation.getValueAtTime(audioPosition)
+                this.texture.position.y = this.moveYAnimation.getValueAtTime(audioPosition)  / this.getRatio()
 
             if(this.rotateAnimation.isActive(audioPosition))
                 this.texture.rotation = this.rotateAnimation.getValueAtTime(audioPosition)
 
             if(this.scaleAnimation.isActive(audioPosition)){
-                this.texture.scale.set(this.scaleAnimation.getValueAtTime(audioPosition))
+                this.texture.scale.set(this.scaleAnimation.getValueAtTime(audioPosition)  / this.getRatio())
             }
 
             if(this.scaleVecAnimation.isActive(audioPosition)){
                 var size = this.scaleVecAnimation.getValueAtTime(audioPosition)
-                this.texture.scale.x = size.x
-                this.texture.scale.y = size.y
+                this.texture.scale.x = size.x  / this.getRatio()
+                this.texture.scale.y = size.y  / this.getRatio()
+            }
+
+            if(this.spritePath == 'bgg.jpg'){
+                this.resize()
             }
 
         }else{
             this.texture.visible = false
         }
 
+    }
+
+    resize(){
+        //console.log(this.texture.scale.x + '-' + this.getRatio())
+        //this.texture.scale.x =  this.texture.scale.x / this.getRatio()
+        //this.texture.scale.y =  this.texture.scale.y / this.getRatio()
+        //this.texture.position.x = this.texture.position.x / this.getRatio()
+        //this.texture.position.y = this.texture.position.y / this.getRatio()
+    }
+
+    roundValue(value){
+        return Math.round((value) * 100) / 100
     }
 
     draw(){

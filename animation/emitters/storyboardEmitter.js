@@ -9,7 +9,7 @@ export class StoryboardEmitter{
         this.sprites.forEach(sprite => {
                 var texture = PIXI.Sprite.from(sprite.spritePath)
                 if(texture){
-                    sprite.loadTexture(texture);
+                    sprite.loadTexture(texture)
                     this.app.stage.addChild(texture)
                 }
         })
@@ -18,10 +18,10 @@ export class StoryboardEmitter{
     loadSprites(sprites){
         this.sprites = [...this.sprites, ...sprites]
     }
-
-    update(audioPosition){
+    
+    update(audioPosition, ratio){
         this.sprites.forEach(sprite => {
-            sprite.update(audioPosition)
+            sprite.update(audioPosition, ratio)
         })
     }
 }

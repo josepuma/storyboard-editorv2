@@ -22,12 +22,12 @@ export default {
       sbEmitter: null,
       audio: null,
       osb: null,
-      sbparser: null
+      sbparser: null,
+      ratio: 0
     }
   },
   mounted(){
     this.startPixi()
-    this.resize()
   },
   methods: {
     async startPixi(){
@@ -40,13 +40,7 @@ export default {
         width: 854,
         height: 480,
       });
-      /*var sprite = new Sprite('img/bg.jpg');
-      sprite.fade(0,5577,0,1)
-      sprite.fade(10377,11063,1,0.2)
-      sprite.fade(11406,11406, 1,1)
-      sprite.fade(11406,11406, 1,1)
-      sprite.fade(54949, 54949, 0, 0)
-      sprite.fade(87863,88034,0,1)*/
+
       var sprites = []
       await fetch('sb.osb')
       .then(response => response.text())
@@ -69,25 +63,27 @@ export default {
       items.push(a)
 
       //console.log(sprites)
-     
+      this.resize()
+      window.addEventListener('resize', this.resize);
       this.sbEmitter = new StoryboardEmitter(this.app)
       this.sbEmitter.loadSprites(sprites)
       this.sbEmitter.loadTextures()
-      this.audio = new Player('audios/okaeri.mp3')
+      this.audio = new Player('audios/eos.mp3')
       this.$el.appendChild(this.app.view);
-      window.addEventListener('resize', this.resize);
       
       
       this.app.ticker.add((delta) => {
         if(this.audio.getPosition() > 0){
             stats.begin();
-            this.sbEmitter.update(this.audio.getPosition())
+            this.sbEmitter.update(this.audio.getPosition(), this.ratio)
             stats.end()
           }
       });
     },
     resize(){
-      //this.app.renderer.resize(window.innerWidth, window.innerHeight)
+      const w = window.innerWidth
+      const h = window.innerHeight
+      this.app.renderer.resize(w, h)
     }
   }
 }
