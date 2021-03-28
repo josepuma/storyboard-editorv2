@@ -69,21 +69,21 @@ export class Sprite {
 
         this.texture.alpha = this.fadeAnimation.startValue()
         if(this.positionX != 427 && this.moveXAnimation.commands.length == 0){
-            this.texture.x = this.positionX  / this.getRatio() 
+            this.texture.x = this.positionX 
         }else{
-            this.texture.x = this.moveXAnimation.startValue()  / this.getRatio() 
+            this.texture.x = this.moveXAnimation.startValue()  
         }
 
         if(this.positionY != 240 && this.moveYAnimation.commands.length == 0){
-            this.texture.y = this.positionY / this.getRatio() 
+            this.texture.y = this.positionY 
         }else{
-            this.texture.y = this.moveYAnimation.startValue()  / this.getRatio() 
+            this.texture.y = this.moveYAnimation.startValue() 
         }
 
         this.texture.rotation = this.rotateAnimation.startValue()
 
-        this.texture.scale.x = this.scaleAnimation.startValue()  / this.getRatio()  
-        this.texture.scale.y = this.scaleAnimation.startValue()  / this.getRatio() 
+        this.texture.scale.x = this.scaleAnimation.startValue()   
+        this.texture.scale.y = this.scaleAnimation.startValue()  
 
 
         if(this.isAdditive){
@@ -122,7 +122,7 @@ export class Sprite {
     }
 
     getRatio(){
-        return this.roundValue(854 / window.innerWidth )
+        //-return this.roundValue(854 / window.innerWidth )
     }
 
     update(audioPosition, ratio){
@@ -137,26 +137,22 @@ export class Sprite {
                 this.texture.alpha = this.fadeAnimation.getValueAtTime(audioPosition)
 
             if(this.moveXAnimation.isActive(audioPosition))
-                this.texture.position.x = this.moveXAnimation.getValueAtTime(audioPosition)  / this.getRatio()
+                this.texture.position.x = this.moveXAnimation.getValueAtTime(audioPosition) 
 
             if(this.moveYAnimation.isActive(audioPosition))
-                this.texture.position.y = this.moveYAnimation.getValueAtTime(audioPosition)  / this.getRatio()
+                this.texture.position.y = this.moveYAnimation.getValueAtTime(audioPosition)  
 
             if(this.rotateAnimation.isActive(audioPosition))
                 this.texture.rotation = this.rotateAnimation.getValueAtTime(audioPosition)
 
             if(this.scaleAnimation.isActive(audioPosition)){
-                this.texture.scale.set(this.scaleAnimation.getValueAtTime(audioPosition)  / this.getRatio())
+                this.texture.scale.set(this.scaleAnimation.getValueAtTime(audioPosition))
             }
 
             if(this.scaleVecAnimation.isActive(audioPosition)){
                 var size = this.scaleVecAnimation.getValueAtTime(audioPosition)
-                this.texture.scale.x = size.x  / this.getRatio()
-                this.texture.scale.y = size.y  / this.getRatio()
-            }
-
-            if(this.spritePath == 'bgg.jpg'){
-                this.resize()
+                this.texture.scale.x = size.x  
+                this.texture.scale.y = size.y  
             }
 
         }else{

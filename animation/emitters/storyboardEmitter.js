@@ -7,7 +7,7 @@ export class StoryboardEmitter{
 
     loadTextures(){
         this.sprites.forEach(sprite => {
-                var texture = PIXI.Sprite.from(sprite.spritePath)
+                var texture = PIXI.Sprite.from('/'+sprite.spritePath)
                 if(texture){
                     sprite.loadTexture(texture)
                     this.app.stage.addChild(texture)

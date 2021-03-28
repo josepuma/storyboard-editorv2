@@ -63,8 +63,8 @@ export default {
       items.push(a)
 
       //console.log(sprites)
-      this.resize()
-      window.addEventListener('resize', this.resize);
+      //-this.resize()
+      //-window.addEventListener('resize', this.resize);
       this.sbEmitter = new StoryboardEmitter(this.app)
       this.sbEmitter.loadSprites(sprites)
       this.sbEmitter.loadTextures()

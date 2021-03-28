@@ -1,0 +1,78 @@
+*{
+    font-family: $content-font;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-weight: 500;
+}
+
+p{
+    font-weight: 400;
+    color: rgba($gray-accent, .9);
+}
+
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}
+
+form{
+    label{
+        &.uk-form-label{
+            font-size: .75rem;
+            font-weight: bolder;
+        }
+    }
+    input{
+        &.uk-input{
+            border-radius: $default-border-radius;
+            font-size: .8rem;
+            color: $dark-text-color;
+            font-weight: 500;
+        }
+    }
+
+    select{
+        &.uk-select{
+            border-radius: $default-border-radius;
+            font-size: .8rem;
+            color: $dark-text-color;
+            font-weight: 500;
+        }
+    }
+}
+
+button{
+    &.primary-button{
+        background-color: $yellow-accent;
+        color: $default-color;
+        border-radius: $default-border-radius;
+        padding: .2rem 1.8rem;
+        font-weight: bolder;
+        text-transform: capitalize;
+        font-size: .8rem;
+    }
+}
+
+.editor-canvas{
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+
+    .bounce-enter-active {
+    animation: bounce-in .5s;
+  }
+  .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+  }
+  @keyframes bounce-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0rem);
+    }
+  }
