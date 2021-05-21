@@ -3,7 +3,7 @@
         section.uk-section.uk-section-small
             .uk-container.uk-container-large
                 div.editor-canvas(ref="editor")
-                mainEditor(:sprites="sprites", width="1318", :position="position")
+                //-mainEditor(:sprites="sprites", width="1318", :position="position")
                 button(@click="audio.playAudio()") Play
 </template>
 
@@ -64,7 +64,7 @@ export default {
       this.sbEmitter = new StoryboardEmitter(this.app)
       this.sbEmitter.loadSprites(this.sprites)
       this.sbEmitter.loadTextures()
-      this.audio = new Player('/audios/lia.mp3')
+      this.audio = new Player('/audios/keeno.mp3')
       const { editor } = this.$refs
       editor.appendChild(this.app.view);
       
